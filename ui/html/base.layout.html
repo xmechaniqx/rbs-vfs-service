@@ -1,0 +1,63 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel='stylesheet' href='/static/css/style.css'>
+
+    <title>{{template "title" .}} RBS-EX2</title>
+
+</head>
+<body>
+ 
+    <div id="block-body">
+
+    <!-- //  в тегах header прописана наша шапка  -->
+
+     <header>
+
+
+       <div class="logo">
+        <a href="index.html">
+          <span class="nameOfHead">VIRTUAL FILE SYSTEM</span>
+        </a>   
+       
+       </div>  
+       <span class="url"></span>
+       <!-- // разметка для нашего меню -->
+
+       <div class="top-menu">
+         <ul>
+             <!-- <li><a class="clickMenu" href="#">Темы</a></li>
+             <li><a href="#">Видеоуроки</a></li>
+             <li><a href="#">Об авторе</a></li> -->
+             <!-- <li><a href="/HTML/img/arrow.png", width ="5%"></a><a href="#">Назад</a></li> -->
+         </ul>  
+       </div> 
+       <div class="top-menu">
+       <ul>
+        <li><a href="#">Назад</a></li>
+      </ul>  </div>
+     </header>
+
+
+<div class="body-block">
+     <ul>
+        <li><a href="/static" class="#">test directory</a></li>
+        <li><a class="#">test directory2</a></li>
+        <li><a class="#">test directory3</a></li>
+        <li><a class="#">test directory4</a></li>
+        <!-- <li><a class="#">test directory5</a></li> -->
+
+     </ul>
+
+</div>
+      <div id="block-content"></div>  
+        
+    </div>   
+    
+    
+    
+</body>
+</html>
+{{end}}
