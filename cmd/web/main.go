@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 )
@@ -50,6 +49,12 @@ func main() {
 	mux.HandleFunc("/", home)
 	mux.HandleFunc("/snippet", showSnippet)
 	mux.HandleFunc("/snippet/create", createSnippet)
+
+	// mux.Handle("/ui/static/img/", http.StripPrefix("/ui/static/img/", http.FileServer(http.Dir("./img"))))
+	// mux.HandleFunc("/img", func(w http.ResponseWriter, r *http.Request) {
+	// 	http.ServeFile(w, r, "base.layout.html")
+	// })
+
 	// Используется функция http.ListenAndServe() для запуска нового веб-сервера.
 	// Мы передаем два параметра: TCP-адрес сети для прослушивания (в данном случае это "localhost:4000")
 	// и созданный рутер. Если вызов http.ListenAndServe() возвращает ошибку
@@ -59,7 +64,7 @@ func main() {
 
 	fileServer := http.FileServer(http.Dir("./ui/static/"))
 	mux.Handle("/static/", http.StripPrefix("/static", fileServer))
-	fmt.Println(fileServer)
+	// fmt.Println(fileServer)
 	// fileServer := http.FileServer(http.Dir("C:/workspace"))
 	// mux.Handle("/#/", http.StripPrefix("/#", fileServer))
 

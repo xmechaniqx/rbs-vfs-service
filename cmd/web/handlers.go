@@ -31,7 +31,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 		log.Println(err.Error())
 		http.Error(w, "Internal Server Error", 500)
 	}
-	w.Write([]byte("Привет из Snippetbox (handler)"))
+	// w.Write([]byte("Привет из Snippetbox (handler)"))
 }
 
 // Обработчик для отображения содержимого заметки.

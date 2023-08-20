@@ -1,19 +1,19 @@
 
-/* 
-@font-face {
+
+/* @font-face {
 	font-family: "Exo2-MediumItalic";
 	src: url("../fonts/Exo2-MediumItalic.ttf");
 }
 @font-face {
 	font-family: "Exo2-Bold";
 	src: url("../fonts/Exo2-Bold.ttf");
-}
-@font-face {
+} */
+/* @font-face {
 	font-family: "Exo2-BoldItalic";
 	src: url("../fonts/Exo2-BoldItalic.ttf");
 } */
-/* * {
-    margin: 0;
+* {
+    margin: 0;  
     padding: 0;
 }
 body {
@@ -38,12 +38,12 @@ header {
     height: auto;
     min-height: 500px;
 }
-.logo {
+/* .logo {
     width: 200px;
     float: left;
     height: 80px;
-}
-.logo a {
+} */
+/* .logo a {
     display: block;
     margin-left: 15px;
     margin-top: 10px;
@@ -52,7 +52,7 @@ header {
     color:  #b2aeb2;
     text-decoration: none;
     cursor: pointer;
-}
+} */
 .nameOfHead {
     color: #ffffff;
     
@@ -70,8 +70,8 @@ header {
     height: 80px;
     float: left;
     background-color: rgb(0, 0, 0);
-} */
-/* .top-menu ul li {
+}
+.top-menu ul li {
     list-style: none;
     float: left;
     text-align: center;
@@ -109,8 +109,8 @@ header {
     margin-top: 12px;
     text-align: center;
     margin-bottom: 8px;
-     */
-/* }
+    
+}
 .block-top-auth a {
     text-decoration: none;
     color: white;
@@ -126,9 +126,9 @@ header {
     -ms-transition:all 0.5s ease;
     -moz-transition:all 0.5s ease;
     color: #090e29;
-} */
+}
 
-/* 
+
 .body-block ul li {
     list-style: none;
     float: left;
@@ -150,4 +150,43 @@ header {
     cursor: pointer;
     font-size: large;
     color: #090e29;
-} */
+}
+
+
+.top-menu-path {
+    width: auto;
+    height: 80px;
+    float: left;
+    background-color: rgb(0, 0, 0);
+}
+.top-menu-path ul li {
+    list-style: none;
+    float: left;
+    text-align: center;
+    background-image: url();
+}
+.top-menu-path ul li a {
+    display: block;
+    width:333px;
+    text-decoration: none;
+    font-family:  "Exo2-Medium", sans-serif;
+    font-size: 23px;
+    color: rgb(255, 255, 255);
+    height: 55px;
+    padding-top: 25px;
+    cursor: pointer;
+    image-resolution: 5%;
+}
+.top-menu-path ul li a:hover {
+    transition: all 0.5s ease;
+    font-size: large;
+    color: #090e29;
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition:all 0.5s ease;
+    -moz-transition:all 0.5s ease;
+    background: #ffffff;
+}
+.top-menu-path{
+    color: red
+}
