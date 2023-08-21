@@ -8,6 +8,7 @@ import (
 	"strconv"
 ) // Создается функция-обработчик "home", которая записывает байтовый слайс, содержащий
 // текст "Привет из Snippetbox" как тело ответа.
+
 func home(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		http.NotFound(w, r)
@@ -66,6 +67,21 @@ func createSnippet(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Write([]byte("Форма для создания новой заметки..."))
 }
-func logic() {
 
-}
+// func showFlag(w http.ResponseWriter, r *http.Request) {
+// 	// flag := make(chan string)
+// 	// Извлекаем значение параметра id из URL и попытаемся
+// 	// конвертировать строку в integer используя функцию strconv.Atoi(). Если его нельзя
+// 	// конвертировать в integer, или значение меньше 1, возвращаем ответ
+// 	// 404 - страница не найдена!
+// 	root := r.URL.Query().Get("root")
+// 	// if err != nil {
+// 	// 	http.NotFound(w, r)
+// 	// flag <- root
+// 	// }
+// 	// fmt.Println(root)
+// 	fmt.Sprintf(root)
+// 	// Используем функцию fmt.Fprintf() для вставки значения из id в строку ответа
+// 	// и записываем его в http.ResponseWriter.
+// 	// fmt.Fprintf(w, "Отображение выбранной заметки с ID %d...", id)
+// }
