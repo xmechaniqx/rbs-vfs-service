@@ -34,16 +34,16 @@ func main() {
 }
 func showFlag(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
-	w.Header().Set("Content-Type", "application/json")
+	// w.Header().Set("Content-Type", "application/json")
 	root := r.URL.Query().Get("root")
 	fmt.Println(root)
-	returner, err := vfs.DirLook(root)
+	returner, _, err := vfs.DirLook(root)
 	if err != nil {
 		fmt.Println("Ошибка функции vfs.DirLook")
 	}
 	// fmt.Println(returner)
 	// json.NewEncoder(w).Encode(r)
-	output, err := json.MarshalIndent(returner, "", "\t")
+	output, err := json.MarshalIndent(returner, "", "")
 	if err != nil {
 		fmt.Println("Marshall")
 	}
