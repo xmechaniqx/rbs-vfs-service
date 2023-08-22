@@ -1,9 +1,9 @@
 
 
-@font-face {
+/* @font-face {
 	font-family: "Exo2-MediumItalic";
 	src: url("../fonts/Exo2-MediumItalic.ttf");
-}
+} */
 @font-face {
 	font-family: "Exo2-Bold";
 	src: url("../fonts/Exo2-Bold.ttf");
@@ -12,12 +12,12 @@
 	font-family: "Exo2-BoldItalic";
 	src: url("../fonts/Exo2-BoldItalic.ttf");
 }
-* {
+/* * {
     margin: 0;  
     padding: 0;
-}
+} */
 body {
-    background-image: url('/HTML/img/background-image.jpg');
+    /* background-image: url('/HTML/img/background-image.jpg'); */
     background: fixed;
     background-size: auto;
 }
