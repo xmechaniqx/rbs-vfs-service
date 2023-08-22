@@ -6,12 +6,12 @@
 } */
 @font-face {
 	font-family: "Exo2-Bold";
-	src: url("../fonts/Exo2-Bold.ttf");
+	src: url("/ui/static/fonts/Exo2-Bold.ttf");
 }
-@font-face {
+/* @font-face {
 	font-family: "Exo2-BoldItalic";
 	src: url("../fonts/Exo2-BoldItalic.ttf");
-}
+} */
 /* * {
     margin: 0;  
     padding: 0;
