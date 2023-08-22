@@ -30,8 +30,8 @@ func showFlag(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println("Ошибка функции vfs.DirLook")
 	}
-	output, err := json.Marshal(returner)
-	// JsonOutput, err := json.MarshalIndent(returner, "", "\t")
+	// output, err := json.Marshal(returner)
+	output, err := json.MarshalIndent(returner, "", "\t")
 	if err != nil {
 		fmt.Println("Can't Marshall JSON")
 	}
