@@ -77,21 +77,21 @@ header {
     float: left;
     text-align: center;
 }
-.top-menu ul li a {
+.top-menu ul li span {
     display: block;
     width:333px;
     text-decoration: none;
     font-family:  "Exo2-Medium", sans-serif;
-    font-size: 23px;
+    font-size: 25px;
     color: rgb(255, 255, 255);
-    height: 55px;
-    padding-top: 25px;
+    height: 60px;
+    padding-bottom: 10px;
     cursor: pointer;
     image-resolution: 5%;
 }
-.top-menu ul li a:hover {
+.top-menu span:hover {
     /* transition: all 0.5s ease; */
-    font-size: 23px;
+    font-size: 25px;
     color: #090e29;
     /* -webkit-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -136,7 +136,7 @@ header {
     width:100%;
     padding-top: 10px;
 }
-.body-block ul li a {
+.body-block ul li span{
     border: 5px solid black;
     display: block;
     width: 1620px;
