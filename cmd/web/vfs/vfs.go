@@ -44,11 +44,23 @@ func DirLook(root string) (MainVFS, error) {
 	var wg sync.WaitGroup
 	wg.Add(len(filesOfDir))
 	for _, dirEntered := range filesOfDir {
-
 		go func(dirEntered string) {
 			defer wg.Done()
-			size, stat := dirSize(dirEntered)
-			vfsNodes = append(vfsNodes, VFSNode{Path: dirEntered, Size: size, Stat: stat})
+			var dirEnteredType string
+			var size float64
+			fs, err := os.Stat(dirEntered)
+			if err != nil {
+				fmt.Println(err)
+			}
+			if fs.IsDir() {
+				dirEnteredType = "dir"
+				size = float64(dirSize(dirEntered))
+			} else {
+				dirEnteredType = "file"
+				size = float64(fs.Size())
+			}
+
+			vfsNodes = append(vfsNodes, VFSNode{Path: dirEntered, Size: size, Stat: dirEnteredType})
 
 		}(dirEntered)
 	}
@@ -64,35 +76,21 @@ func DirLook(root string) (MainVFS, error) {
 
 /*dirSize() функция принимает путь к директории, определяет тип содержимого (файл или папка)
 и возвращает размер содержимого для файла либо сумму размеров содержимого для папки*/
-func dirSize(path string) (float64, string) {
-	sizes := make(chan int64)
-
-	var stat string
-	size := int64(0)
+func dirSize(path string) int64 {
+	var size int64 = 0
 	readSize := func(path string, file os.FileInfo, err error) error {
 		if err != nil || file == nil {
 			return err
 		}
 		if !file.IsDir() {
-			// fmt.Println(path, file.Size())
-			stat = "file"
-			sizes <- file.Size()
+			size += file.Size()
 		} else {
-			stat = "dir"
-			size = file.Size()
+			size += dirSize(file.Name())
 		}
 		return err
 	}
-	go func() {
-		filepath.Walk(path, readSize)
-		close(sizes)
-	}()
-	for s := range sizes {
-		size += s
-	}
-	// fmt.Println(stat, path)
-	return float64(size), stat
-
+	filepath.Walk(path, readSize)
+	return size
 }
 
 // http://127.0.0.1:4000/flag?root=/home/username/

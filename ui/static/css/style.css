@@ -69,15 +69,15 @@ header {
 .top-menu {
     width: auto;
     height: 80px;
-    float: right;
+    /* float: right; */
     background-color: rgb(0, 0, 0);
 }
-.top-menu ul li {
-    list-style: none;
+.top-menu ul  {
+    /* list-style: none; */
     float: left;
     text-align: center;
 }
-.top-menu ul li span {
+.top-menu ul span {
     display: block;
     width:333px;
     text-decoration: none;
@@ -85,13 +85,13 @@ header {
     font-size: 25px;
     color: rgb(255, 255, 255);
     height: 60px;
-    padding-bottom: 10px;
+    padding-bottom:2px;
     cursor: pointer;
-    image-resolution: 5%;
+    /* image-resolution: 5%; */
 }
 .top-menu span:hover {
     /* transition: all 0.5s ease; */
-    font-size: 25px;
+    /* font-size: 25px; */
     color: #090e29;
     /* -webkit-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -191,5 +191,13 @@ header {
     background: #ffffff;
 } */
 .top-menu-path{
-    color: red
+ 
+    font-family: "Exo2-Bold", sans-serif;
+    font-size: 28px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+}
+.footer{
+
 }
