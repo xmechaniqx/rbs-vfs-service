@@ -5,11 +5,15 @@ var defaultURL = window.location.href + 'flag?root=/home/username/Downloads';
 //Объявляем переменную для последующий записи путей возврата (кнопка "Назад")
 var backURL
 
-if (backURL!=('flag?root=/home/')||('flag?root=/home/username/')){
+//Обрабатываем логику возврата в предыдущую директорию
   const goBack=document.getElementById("goback").addEventListener("click", () => {
+    //Если возврат ссылается на директорию выше корня, то кнопка "Назад" не сработает
+    if (backURL!='flag?root=/home/username/'){
   fnRequest(backURL) 
-  }, false) 
 }
+  }, false) 
+
+  console.log(backURL)  
 
 fnRequest(defaultURL)
 //Функция fnRequest() принимает URL адрес и отправляет HTTP запрос 
@@ -30,10 +34,10 @@ function renderResponse() {
     const li = document.createElement("li")
     li.setAttribute("vfs_path",element.path)
     if (element.stat=="dir") {
-      li.innerHTML = '<span ><div class="results"><img src="/static/img/folder.png" width="2%">'+element.path +'</div></span>';
+      li.innerHTML = '<span ><div class="results"><img src="/static/img/folder.png" width="1%">'+element.path +'</div></span>';
     }
     if (element.stat=="file") {
-      li.innerHTML = '<span ><div class="results"><img src="/static/img/file.png" width="2%">'+element.path +'</div></span>';
+      li.innerHTML = '<span ><div class="results"><img src="/static/img/file.png" width="1%">'+element.path +'</div></span>';
     }
     //Записываем новый путь перехода по директории в переменную newUrl
     let newUrl=window.location.href + 'flag?root='+element.path+'/'

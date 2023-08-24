@@ -20,6 +20,7 @@ body {
     /* background-image: url('/HTML/img/background-image.jpg'); */
     background: fixed;
     background-size: auto;
+    background-color: rgb(240, 240, 240);
 }
 #block-body {
     width: 90%;
@@ -27,6 +28,9 @@ body {
     height: auto;
 }
 header {    
+    position: sticky;
+    top: 15px;
+  
    /* width: 1650px;  */
    width: auto; 
    height: 80px;
@@ -82,10 +86,11 @@ header {
     display: block;
     /* width:333px; */
     width: auto;
+    text-align: right   ;
     text-decoration: none;
     font-family:  "Exo2-Medium", sans-serif;
     font-size: 25px;
-    color: rgb(255, 255, 255);
+    color: rgb(153, 0, 0);
     height: 60px;
     padding-bottom:2px;
     cursor: pointer;
@@ -115,7 +120,7 @@ header {
 }
 .block-top-auth a {
     text-decoration: none;
-    color: white;
+    color: rgb(255, 255, 255);
     font-family:  "Exo2-Medium", sans-serif;
     font-size: 15px;
     text-decoration: underline;
@@ -139,18 +144,19 @@ header {
     padding-top: 10px;
 }
 .body-block ul li span{
-    border: 5px solid black;
+    border: 3px solid black;
     display: block;
-    width: 1620px;
+    /* width: 1620px; */
+    width: auto;
     inline-size: auto;
     text-decoration: none;
     font-family:  "Exo2-Medium", sans-serif;
     font-size: 17px;
-    height: 55px;
+    height: 30px;
     padding-top: 25px;
     padding-left:20px;
     cursor: pointer;
-    font-size: large;
+    font-size: medium;
     color: #090e29;
 }
 
@@ -170,7 +176,9 @@ header {
 .top-menu-path ul li a {
     display: block;
     /* width: 360px; */
-    overflow-inline: scroll;
+    /* overflow-inline: scroll; */
+    white-space: nowrap;
+    overflow: hidden;
     /* width:350px; */
     text-decoration: none;
     font-family:  "Exo2-Medium", sans-serif;

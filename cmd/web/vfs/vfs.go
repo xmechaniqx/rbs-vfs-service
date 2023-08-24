@@ -37,7 +37,6 @@ func DirLook(root string) (MainVFS, error) {
 	if err != nil {
 		fmt.Printf("Ошибка назначенного пути %e", err)
 	}
-	filepath.Abs(root)
 	for _, file := range files {
 		filesOfDir = append(filesOfDir, filepath.Join(path, file.Name()))
 	}
@@ -47,6 +46,7 @@ func DirLook(root string) (MainVFS, error) {
 	for _, dirEntered := range filesOfDir {
 		go func(dirEntered string) {
 			defer wg.Done()
+			fmt.Println("dirEntered=", dirEntered)
 			var dirEnteredType string
 			var size float64
 			fs, err := os.Stat(dirEntered)
@@ -77,7 +77,8 @@ func DirLook(root string) (MainVFS, error) {
 
 /*dirSize() функция принимает путь к директории, определяет тип содержимого (файл или папка)
 и возвращает размер содержимого для файла либо сумму размеров содержимого для папки*/
-func dirSize(path string) int64 {
+func dirSize(root string) int64 {
+	fmt.Println("dirsize root = ", root)
 	var size int64 = 0
 	readSize := func(path string, file os.FileInfo, err error) error {
 		if err != nil || file == nil {
@@ -86,13 +87,13 @@ func dirSize(path string) int64 {
 		if !file.IsDir() {
 			size += file.Size()
 		} else {
-			size += dirSize(file.Name())
+			size += dirSize(filepath.Join(root, file.Name()))
 		}
 		return err
 	}
-	err := filepath.Walk(path, readSize)
+	err := filepath.Walk(root, readSize)
 	if err != nil {
-		fmt.Println("Ошибка filepath.Walk", "path", path, "readSize", readSize)
+		fmt.Println(err, "Ошибка filepath.Walk", "path", root, "readSize", readSize)
 	}
 	return size
 }
