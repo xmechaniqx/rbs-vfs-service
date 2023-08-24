@@ -29,6 +29,7 @@ func DirLook(root string) (MainVFS, error) {
 	duration := time.Since(start)
 	var filesOfDir []string
 	files, err := os.ReadDir(root)
+
 	if err != nil {
 		fmt.Printf("Ошибка чтения директории %e", err)
 	}
@@ -89,7 +90,10 @@ func dirSize(path string) int64 {
 		}
 		return err
 	}
-	filepath.Walk(path, readSize)
+	err := filepath.Walk(path, readSize)
+	if err != nil {
+		fmt.Println("Ошибка filepath.Walk", "path", path, "readSize", readSize)
+	}
 	return size
 }
 
