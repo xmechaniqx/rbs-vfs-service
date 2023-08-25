@@ -66,7 +66,6 @@ func DirLook(root string) (MainVFS, error) {
 		}(dirEntered)
 	}
 	wg.Wait()
-
 	MyMainVFS := MainVFS{
 		Duration: duration,
 		Root:     root,
@@ -78,16 +77,16 @@ func DirLook(root string) (MainVFS, error) {
 /*dirSize() функция принимает путь к директории, определяет тип содержимого (файл или папка)
 и возвращает размер содержимого для файла либо сумму размеров содержимого для папки*/
 func dirSize(root string) int64 {
-	fmt.Println("dirsize root = ", root)
+	// fmt.Println("dirsize root = ", root)
 	var size int64 = 0
 	readSize := func(path string, file os.FileInfo, err error) error {
-		if err != nil || file == nil {
-			return err
+		if err != nil {
+			return nil
 		}
 		if !file.IsDir() {
 			size += file.Size()
 		} else {
-			size += dirSize(filepath.Join(root, file.Name()))
+			size += dirSize(filepath.Join(root+"/", file.Name()))
 		}
 		return err
 	}
@@ -95,6 +94,7 @@ func dirSize(root string) int64 {
 	if err != nil {
 		fmt.Println(err, "Ошибка filepath.Walk", "path", root, "readSize", readSize)
 	}
+	fmt.Println(root, size)
 	return size
 }
 

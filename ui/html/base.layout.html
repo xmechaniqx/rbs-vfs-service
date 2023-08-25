@@ -8,46 +8,29 @@
 
 </head>
 <body>
- 
-    <div id="block-body">
-
-     <header>
-      
+  <div id="block-body">
+    <header>
       <h3 class="title">{{.output }}</h3>
 
-       <div class="logo">
-        <a><span class="nameOfHead">VIRTUAL FILE SYSTEM</span></a></div>  
-    <!-- <a href="index.html"><span class="nameOfHead">VIRTUAL FILE SYSTEM</span></a></div>  -->
-      <div class="top-menu-path">
-        <ul id="current_path">
-      <!-- <li><p>/user/local/ui/</p></li> -->
-      </ul> </div>
-      
-       <div class="top-menu">
-          <ul id="goback">
-          <li><span>Назад</span></li>         
-      </ul> 
-
-    </div>
+  <div class="logo"><span class="nameOfHead">VIRTUAL FILE SYSTEM</span></div>
+  <div class="top-menu-path">
+      <ul id="current_path"></ul> 
   </div>
-     </header>
+       <div class="back-menu"><span id="goback">Назад</span>
 
-<div class="body-block">
-     <ul id="result"> 
-      <canvas id="preloader" width="100" height="100"></canvas>
-      <!-- <li><a class="#"><div class="results"></div></a></li> -->
-        <!-- <li><a href="/static" class="#">test directory</a></li>
-        <li><a class="#" href="https://baneks.ru/random"><img src="/static/img/file.png" width="2%" > test directory2</a></li>
-        <li><a class="#"><img src="/static/img/folder1.png" width="2%"> test directory3</a></li>
-        <li><a class="#">test directory4</a></li> -->
-        <!-- <li><a class="#">test directory5</a></li> -->
+  </div>
+  </div>
+    </header>
 
-     </ul>
+  <div class="body-block">
+    <ul id="result"> 
+    <canvas id="preloader" width="100" height="100"></canvas>
+    </ul>
+  </div>
 
-</div>
-      <div id="block-content"></div>  
-        
-    </div>   
+  <div id="block-content"></div>  
+  
+    <!-- </div>    -->
 </body>
 <footer>  </footer>
 <script src="/static/js/main.js"></script>
