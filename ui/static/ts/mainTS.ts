@@ -6,13 +6,14 @@ var defaultURL:string = window.location.href + 'flag?root=/home/username/Downloa
 var backURL:string
 
 //Обрабатываем логику возврата в предыдущую директорию
-  const goBack=document.getElementById("goback")as HTMLInputElement|null;{
-  addEventListener("click", () => {
-    //Если возврат ссылается на директорию выше корня, то кнопка "Назад" не сработает
-    if (backURL!='flag?root=/home/username/'){
-  fnRequest(backURL) 
-}
-  }, false) 
+  const goBack=document.getElementById("goback");
+  if (goBack) {
+    goBack.addEventListener("click", () => {
+      //Если возврат ссылается на директорию выше корня, то кнопка "Назад" не сработает
+      if (backURL!='flag?root=/home/username/'){
+    fnRequest(backURL) 
+  }
+    }, false)
   }
 
 fnRequest(defaultURL)
@@ -57,7 +58,7 @@ function renderResponse() {
 }
 
 //removeLastDirectoryPartOf() - Вспомогательная функция для удаления последней директории из адреса
-function removeLastDirectoryPartOf(the_url){
+function removeLastDirectoryPartOf(the_url:string){
     var the_arr = the_url.split('/');
     the_arr.pop();
     return( the_arr.join('/') );
