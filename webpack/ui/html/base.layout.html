@@ -1,0 +1,38 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel='stylesheet' href='/static/css/style.css'>
+    <title>{{template "title" .}} RBS-EX2</title>
+
+</head>
+<body>
+  <div id="block-body">
+    <header>
+      <h3 class="title">{{.output }}</h3>
+
+  <div class="logo"><span class="nameOfHead">VIRTUAL FILE SYSTEM</span></div>
+  <div class="top-menu-path">
+      <ul id="current_path"></ul> 
+  </div>
+       <div class="back-menu"><span id="goback">Назад</span>
+
+  </div>
+  </div>
+    </header>
+
+  <div class="body-block">
+    <ul id="result"> 
+    <canvas id="preloader" width="100" height="100"></canvas>
+    </ul>
+  </div>
+
+  <div id="block-content"></div>  
+  
+    <!-- </div>    -->
+</body>
+<footer>  </footer>
+<script src="/static/js/main.js"></script>
+</html>
+{{end}}

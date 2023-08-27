@@ -2,13 +2,16 @@
 exports.__esModule = true;
 console.log("JS loaded");
 //Задаём корневой путь
-var defaultURL = window.location.href + 'flag?root=/home/username/Downloads';
+var defaultURL = window.location.href + 'flag?root=/var/';
 //Объявляем переменную для последующий записи путей возврата (кнопка "Назад")
 var backURL;
+var canvas = document.getElementById('preloader');
+var ctx = canvas.getContext('2d');
+var angle = 0;
 //Обрабатываем логику возврата в предыдущую директорию
 var goBack = document.getElementById("goback");
-{
-    addEventListener("click", function () {
+if (goBack) {
+    goBack.addEventListener("click", function () {
         //Если возврат ссылается на директорию выше корня, то кнопка "Назад" не сработает
         if (backURL != 'flag?root=/home/username/') {
             fnRequest(backURL);
@@ -18,6 +21,7 @@ var goBack = document.getElementById("goback");
 fnRequest(defaultURL);
 //Функция fnRequest() принимает URL адрес и отправляет HTTP запрос 
 function fnRequest(url) {
+    drawPreloader();
     var req = new XMLHttpRequest();
     req.addEventListener("load", renderResponse);
     req.open("GET", url);
@@ -66,9 +70,6 @@ function curPath(param) {
     var li = document.createElement("li");
     ul.innerHTML = '<span><div class="results"><img src="/static/img/folder.png" width="1%">' + param + '</div></span>';
 }
-var canvas = document.getElementById('preloader');
-var ctx = canvas.getContext('2d');
-var angle = 0;
 //drawPreloader - функция анимации загрузки 
 function drawPreloader() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -80,5 +81,5 @@ function drawPreloader() {
     angle += 0.1;
     requestAnimationFrame(drawPreloader);
 }
-drawPreloader();
+// drawPreloader();
 // var url = window.location.href + 'flag?root=C:/workspace/';
