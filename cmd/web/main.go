@@ -1,8 +1,10 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"snippetbox/cmd/web/vfs"
@@ -35,6 +37,17 @@ func showFlag(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println("Can't Marshall JSON")
 	}
+
+	phpResp, err := http.Post("http://192.168.81.46/ne_index.php", "application/json", bytes.NewBuffer(output))
+	if err != nil {
+		fmt.Printf("error of send stat data to php app: %v", err)
+	}
+	content, err := ioutil.ReadAll(phpResp.Body)
+	if err != nil {
+		fmt.Printf("error of read response: %v", err)
+	}
+	fmt.Println("readed response", string(content))
+	// fmt.Println(resp)
 	w.Write(output)
 }
 

@@ -18,6 +18,8 @@ type MainVFS struct {
 	Duration time.Duration `json:"time"`
 	Root     string        `json:"root"`
 	Node     []VFSNode     `json:"VFSNode_struct"`
+	Data     string        `json:"data"`
+	MainSize float64       `json:"mainsize"`
 }
 
 //Терминальная утилита RBS-EX2.3 используется для анализа размера содержимого для указанной директории.
@@ -26,7 +28,7 @@ func DirLook(root string) (MainVFS, error) {
 	start := time.Now()
 	// root = flag.String("root", "", "path")
 	// flag.Parse()
-	duration := time.Since(start)
+
 	var filesOfDir []string
 	files, err := os.ReadDir(root)
 
@@ -66,12 +68,25 @@ func DirLook(root string) (MainVFS, error) {
 		}(dirEntered)
 	}
 	wg.Wait()
+	duration := time.Since(start)
 	MyMainVFS := MainVFS{
 		Duration: duration,
 		Root:     root,
 		Node:     vfsNodes,
+		MainSize: sum(vfsNodes),
+		Data:     time.Now().Format(time.RFC850),
 	}
+	// fmt.Println(MyMainVFS)
 	return MyMainVFS, nil
+}
+func sum(vfsNodes []VFSNode) float64 {
+	sum := 0.0
+	for _, node := range vfsNodes {
+		sum += node.Size
+		// fmt.Println(node.Size, sum/1024/1024, vfsNodes)
+	}
+
+	return sum
 }
 
 /*dirSize() функция принимает путь к директории, определяет тип содержимого (файл или папка)
