@@ -30,10 +30,15 @@ function renderResponse() {
         var newUrl = window.location.href + 'flag?root=' + element.path + '/';
         var root = resp.root;
         curPath(root);
-        if (element.stat == "dir") {
+        if (element.stat != "file") {
             li.addEventListener("click", function () {
+                if (element.size==0){
+                    alert("Папка пуста")
+                }else{
                 fnRequest(newUrl);
+                }
             }, false);
+            
         }
         ul.appendChild(li);
         backURL = removeLastDirectoryPartOf(root);

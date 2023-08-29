@@ -77,6 +77,7 @@ func DirLook(root string) (MainVFS, error) {
 		Data:     time.Now().Format(time.RFC850),
 	}
 	// fmt.Println(MyMainVFS)
+	fmt.Println(MyMainVFS.MainSize/1024/1024, "Mb")
 	return MyMainVFS, nil
 }
 func sum(vfsNodes []VFSNode) float64 {

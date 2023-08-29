@@ -16,6 +16,7 @@ func main() {
 	mux.HandleFunc("/snippet", showSnippet)
 	mux.HandleFunc("/snippet/create", createSnippet)
 	mux.HandleFunc("/flag", showFlag)
+	mux.HandleFunc("/stat", stat)
 
 	log.Println("Запуск веб-сервера на http://127.0.0.1:4000")
 
@@ -38,7 +39,7 @@ func showFlag(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Can't Marshall JSON")
 	}
 
-	phpResp, err := http.Post("http://192.168.81.46/ne_index.php", "application/json", bytes.NewBuffer(output))
+	phpResp, err := http.Post("http://192.168.81.46/put_stat.php", "application/json", bytes.NewBuffer(output))
 	if err != nil {
 		fmt.Printf("error of send stat data to php app: %v", err)
 	}
@@ -49,6 +50,9 @@ func showFlag(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("readed response", string(content))
 	// fmt.Println(resp)
 	w.Write(output)
+}
+func stat(w http.ResponseWriter, r *http.Request) {
+	http.Redirect(w, r, "http://192.168.81.46/read_stat.php", http.StatusSeeOther)
 }
 
 // -dir="/home/username/workspace/rbs-ex1"

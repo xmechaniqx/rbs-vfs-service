@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded",function(){
 console.log("JS loaded");
 //Задаём корневой путь
 var defaultURL = window.location.href + 'flag?root=/var/';
+console.log(defaultURL)
 //Объявляем переменную для последующий записи путей возврата (кнопка "Назад")
 var backURL;
 var canvas = document.getElementById('preloader');
@@ -47,11 +48,17 @@ function renderResponse() {
         var newUrl = window.location.href + 'flag?root=' + element.path + '/';
         var root = resp.root;
         curPath(root);
-        if (element.stat == "dir") {
+        if (element.stat != "file") {
             li.addEventListener("click", function () {
+                if (element.size==0){
+                    alert("Папка пуста")
+                }else{
                 fnRequest(newUrl);
+                }
             }, false);
+            
         }
+        
         ul.appendChild(li);
         backURL = removeLastDirectoryPartOf(root);
         backURL = removeLastDirectoryPartOf(backURL);
