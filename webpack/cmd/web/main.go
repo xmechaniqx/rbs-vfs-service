@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"snippetbox/cmd/web/vfs"
+	"rbs-vfs-service/cmd/web/vfs"
 )
 
 func main() {

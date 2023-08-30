@@ -1,3 +1,4 @@
+//Терминальная утилита RBS-EX2.3 используется для анализа размера содержимого для указанной директории
 package vfs
 
 import (
@@ -8,30 +9,28 @@ import (
 	"time"
 )
 
+//Структура VFSNode содержит параметры расположения, размера и типа (файл или папка) вложенных объектов внутри родительской директории (MainVFS.root)
 type VFSNode struct {
-	Path string  `json:"path"`
-	Size float64 `json:"size"`
-	Stat string  `json:"stat"`
+	Path string  `json:"path"` //Расположение обрабатываемого файла (не путать с корневым)
+	Size float64 `json:"size"` //Размер обрабатываемого файла (не путать с корневым)
+	Stat string  `json:"stat"` //Статус файлом или директорией является обрабатываемый файл по заданному расположению
 }
 
+//Структура MainVFS содержит параметры вычисляемые в процессе выполнения функции DirLook().
 type MainVFS struct {
-	Duration time.Duration `json:"time"`
-	Root     string        `json:"root"`
-	Node     []VFSNode     `json:"VFSNode_struct"`
-	Data     string        `json:"data"`
-	MainSize float64       `json:"mainsize"`
+	Duration time.Duration `json:"time"`          //Время затраченное на обработку всех файлов в заданной директории
+	Root     string        `json:"root"`          //Расположение корневой директории
+	Node     []VFSNode     `json:"VFSNodeStruct"` //Структура описывающая параметры конкретных файлов
+	Data     string        `json:"data"`          //Дата и время совершения вычислений
+	MainSize float64       `json:"mainsize"`      //Общий размер директории
 }
 
-//Терминальная утилита RBS-EX2.3 используется для анализа размера содержимого для указанной директории.
-
+/*dirLook() функция принимает путь к директории, совершает проход пофайловый обход собирая набор параметров в структуру MainVFS */
 func DirLook(root string) (MainVFS, error) {
 	start := time.Now()
-	// root = flag.String("root", "", "path")
-	// flag.Parse()
-
-	var filesOfDir []string
+	var filesOfDir []string //Массив включающий все директории для "root"
+	var wg sync.WaitGroup
 	files, err := os.ReadDir(root)
-
 	if err != nil {
 		fmt.Printf("Ошибка чтения директории %e", err)
 	}
@@ -43,14 +42,13 @@ func DirLook(root string) (MainVFS, error) {
 		filesOfDir = append(filesOfDir, filepath.Join(path, file.Name()))
 	}
 	vfsNodes := make([]VFSNode, 0)
-	var wg sync.WaitGroup
+
 	wg.Add(len(filesOfDir))
-	for _, dirEntered := range filesOfDir {
+	for _, dirEntered := range filesOfDir { //dirEntered - конкретная директория из массива "filesOfDir[]"
 		go func(dirEntered string) {
 			defer wg.Done()
-			fmt.Println("dirEntered=", dirEntered)
-			var dirEnteredType string
-			var size float64
+			var dirEnteredType string //Переменная задающая тип объекта (файл или папка)
+			var size float64          //Итоговый размер объекта
 			fs, err := os.Stat(dirEntered)
 			if err != nil {
 				fmt.Println(err)
@@ -76,24 +74,21 @@ func DirLook(root string) (MainVFS, error) {
 		MainSize: sum(vfsNodes),
 		Data:     time.Now().Format(time.RFC850),
 	}
-	// fmt.Println(MyMainVFS)
-	fmt.Println(MyMainVFS.MainSize/1024/1024, "Mb")
 	return MyMainVFS, nil
 }
+
+//Функция sum() принимает массив структур типа VFSNode и возвращает сумму всех полей параметра "Size"
 func sum(vfsNodes []VFSNode) float64 {
 	sum := 0.0
 	for _, node := range vfsNodes {
 		sum += node.Size
-		// fmt.Println(node.Size, sum/1024/1024, vfsNodes)
 	}
-
 	return sum
 }
 
-/*dirSize() функция принимает путь к директории, определяет тип содержимого (файл или папка)
-и возвращает размер содержимого для файла либо сумму размеров содержимого для папки*/
+/*dirSize() функция принимает путь к директории, определяет тип содержимого (файл или папка)и возвращает размер содержимого для файла
+либо сумму размеров содержимого для папки*/
 func dirSize(root string) int64 {
-	// fmt.Println("dirsize root = ", root)
 	var size int64 = 0
 	readSize := func(path string, file os.FileInfo, err error) error {
 		if err != nil {
@@ -108,9 +103,8 @@ func dirSize(root string) int64 {
 	}
 	err := filepath.Walk(root, readSize)
 	if err != nil {
-		fmt.Println(err, "Ошибка filepath.Walk", "path", root, "readSize", readSize)
+		fmt.Println(err, "Ошибка filepath.Walk", "path", root)
 	}
-	fmt.Println(root, size)
 	return size
 }
 
