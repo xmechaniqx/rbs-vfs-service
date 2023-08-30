@@ -25,8 +25,12 @@ type MainVFS struct {
 	MainSize float64       `json:"mainsize"`      //Общий размер директории
 }
 
+var j = 3672
+var i = 0
+
 /*dirLook() функция принимает путь к директории, совершает проход пофайловый обход собирая набор параметров в структуру MainVFS */
 func DirLook(root string) (MainVFS, error) {
+
 	start := time.Now()
 	var filesOfDir []string //Массив включающий все директории для "root"
 	var wg sync.WaitGroup
@@ -59,6 +63,7 @@ func DirLook(root string) (MainVFS, error) {
 			} else {
 				dirEnteredType = "file"
 				size = float64(fs.Size())
+				i++
 			}
 
 			vfsNodes = append(vfsNodes, VFSNode{Path: dirEntered, Size: size, Stat: dirEnteredType})
@@ -105,6 +110,7 @@ func dirSize(root string) int64 {
 	if err != nil {
 		fmt.Println(err, "Ошибка filepath.Walk", "path", root)
 	}
+
 	return size
 }
 

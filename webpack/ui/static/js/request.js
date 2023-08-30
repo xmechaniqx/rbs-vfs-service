@@ -39,7 +39,7 @@ function renderResponse(){
         if (element.stat != "file") {
             
             li.addEventListener("click", function () {
-                // document.getElementsByClassName('body-block').innerHTML='';
+                
                 fnRequest(newUrl);
             }, false);
         }
@@ -76,7 +76,8 @@ var goBack = document.getElementById("goback");
         goBack.addEventListener("click", function () {
         //Если возврат ссылается на директорию выше корня, то кнопка "Назад" не сработает
             if (goBackUrl != 'flag?root=/') {
-                console.log("second",goBackUrl)
+                document.getElementsByClassName('body-block');
+                document.innerHTML="";
                 fnRequest(goBackUrl);
             }
         }, false);

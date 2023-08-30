@@ -98,6 +98,13 @@ header {
     -moz-transition:all 0.5s ease; */
     /* background: #ffffff; */
 /* } */
+#preloader {
+    left: 40%;
+    top: 40%;
+    /* margin-left: -25%; */
+    position: absolute;
+    /* margin-top: -25%; */
+}
 .block-top-auth {
     width: 100px;
     float: left;
