@@ -46,10 +46,10 @@ func DirLook(root string) (MainVFS, error) {
 		filesOfDir = append(filesOfDir, filepath.Join(path, file.Name()))
 	}
 	vfsNodes := make([]VFSNode, 0)
-
+	result := make([]float64, len(filesOfDir))
 	wg.Add(len(filesOfDir))
-	for _, dirEntered := range filesOfDir { //dirEntered - конкретная директория из массива "filesOfDir[]"
-		go func(dirEntered string) {
+	for i, dirEntered := range filesOfDir { //dirEntered - конкретная директория из массива "filesOfDir[]"
+		go func(dirEntered string, i int) {
 			defer wg.Done()
 			var dirEnteredType string //Переменная задающая тип объекта (файл или папка)
 			var size float64          //Итоговый размер объекта
@@ -63,12 +63,10 @@ func DirLook(root string) (MainVFS, error) {
 			} else {
 				dirEnteredType = "file"
 				size = float64(fs.Size())
-				i++
 			}
-
-			vfsNodes = append(vfsNodes, VFSNode{Path: dirEntered, Size: size, Stat: dirEnteredType})
-
-		}(dirEntered)
+			result[i] = size
+			vfsNodes = append(vfsNodes, VFSNode{Path: dirEntered, Size: result[i], Stat: dirEnteredType})
+		}(dirEntered, i)
 	}
 	wg.Wait()
 	duration := time.Since(start)
