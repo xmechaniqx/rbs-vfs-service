@@ -34,7 +34,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VFS Database</title>
-    <div align="right"> <a href="http://192.168.81.46/graphic.php" >График вычислений</a> </div>
+    <div align="right"> <a href="http://127.0.0.1:4000">Назад</a><a style="margin-left: 20px;" href="http://192.168.81.46/graphic.php" >График вычислений</a></div>
     <style>
         table{
             width: 50%;

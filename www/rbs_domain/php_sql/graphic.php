@@ -9,6 +9,7 @@
     <div style="width: 100%; height: 30px; text-align: center">  
         <span style="float: left">Размер объекта, Мбайт</span>
         Время загрузки, мс
+        <span style="float: right"><a style="margin-left: 20px;" href="http://192.168.81.46/read_stat.php">Назад</a><a style="margin-left: 20px;" href="http://127.0.0.1:4000" >На главную</a>
     </div>
     <div class="ct-chart ct-golden-section" id="chart1"></div>
     <div>
