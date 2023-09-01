@@ -26,6 +26,12 @@ func main() {
 func responseHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "application/json")
 	root := r.URL.Query().Get("root")
+	// flag?root=/home/username/node_modules/
+	defaulPath := "/home/username/node_modules/"
+	if root == "/" {
+		root = defaulPath
+		fmt.Println("defaulRoot")
+	}
 	//Статус чтения из базы данных для заданной пользователем директории
 	fmt.Printf("%s", root)
 	returner, err := vfs.DirLook(root)

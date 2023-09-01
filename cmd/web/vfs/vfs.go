@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"sort"
 	"sync"
 	"time"
 )
@@ -24,9 +25,6 @@ type MainVFS struct {
 	Data     string        `json:"data"`          //Дата и время совершения вычислений
 	MainSize float64       `json:"mainsize"`      //Общий размер директории
 }
-
-var j = 3672
-var i = 0
 
 /*dirLook() функция принимает путь к директории, совершает проход пофайловый обход собирая набор параметров в структуру MainVFS */
 func DirLook(root string) (MainVFS, error) {
@@ -66,6 +64,7 @@ func DirLook(root string) (MainVFS, error) {
 			}
 			result[i] = size
 			vfsNodes = append(vfsNodes, VFSNode{Path: dirEntered, Size: result[i], Stat: dirEnteredType})
+
 		}(dirEntered, i)
 	}
 	wg.Wait()
@@ -77,6 +76,10 @@ func DirLook(root string) (MainVFS, error) {
 		MainSize: sum(vfsNodes),
 		Data:     time.Now().Format(time.RFC850),
 	}
+
+	sort.Slice(vfsNodes, func(i, j int) (less bool) {
+		return vfsNodes[i].Path < vfsNodes[j].Path
+	})
 	return MyMainVFS, nil
 }
 
